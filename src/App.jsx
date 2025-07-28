@@ -10,6 +10,7 @@ import Sobre from "./pages/sobre";
  import Pagamento from "./pages/pagamento"
 import BelezaPage from "./pages/belezaPage";
 import Lojas from "./pages/lojas";
+import ComprarPage from "./pages/comprarPage";
 
  
  
@@ -29,6 +30,7 @@ function App() {
         <Route path="/categorias/Beleza e Cuidados" element={<BelezaPage/>} />
         <Route path="/lojas" element={<Lojas/>} />
         <Route path="/reportar" element={<Suporte/>} />
+        <Route path="/comprar" element={<ComprarPage/>} />
       </Routes>
     </Router>
   )

@@ -1,7 +1,7 @@
 import React from "react";
 import Slider from "react-slick";
 import ProductCard from "./ProductCard";
-import teclado from "../assets/imagens/teclado.png";
+
 import tenis from "../assets/imagens/tenis.png";
 import fone from "../assets/imagens/fone.png";
 import microondas from "../assets/imagens/microondas.png";
@@ -22,7 +22,9 @@ const products = [
     name: "Teclado Mecânico",
     description: "RGB e switches azuis para máxima performance.",
     price: "R$ 299,90",
-    image: teclado,
+    image:
+      "https://http2.mlstatic.com/D_NQ_NP_676608-MLA87478169161_072025-O.webp",
+  
   },
   {
     id: 3,

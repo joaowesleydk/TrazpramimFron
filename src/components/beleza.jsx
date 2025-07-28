@@ -62,7 +62,7 @@ const Beleza = () => {
               href={produto.link}
               className="mt-4 inline-block bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-md text-center transition duration-300"
             >
-              Comprar agora
+              <a href="/comprar">Comprar agora</a>
             </a>
           </div>
         ))}

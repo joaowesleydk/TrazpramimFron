@@ -16,7 +16,7 @@ const ProductCard = ({ name, description, price, image }) => {
         href="#"
         className="bg-orange-500 text-white text-center py-2 px-4 rounded hover:bg-orange-600 transition mt-auto"
       >
-        Comprar Agora
+        <a href="/comprar">Comprar Agora</a>
       </a>
     </div>
    
