@@ -4,7 +4,7 @@ const Beleza = () => {
   const [produtos, setProdutos] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:PORT/api/products") // Troque PORT pela porta que seu backend está rodando
+    fetch("https://trazpramimback.onrender.com/api/products") // Troque PORT pela porta que seu backend está rodando
       .then((res) => res.json())
       .then((data) => setProdutos(data))
       .catch((err) => console.error("Erro ao buscar produtos:", err));
