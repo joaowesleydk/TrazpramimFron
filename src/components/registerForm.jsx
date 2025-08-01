@@ -1,16 +1,37 @@
 import React, { useState } from "react";
- 
+import axios from 'axios'
+
+
+
 const RegisterForm = () => {
-    const [nome, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [senha, setSenha] = useState('');
- 
-    const handleSubmit = (e) => {
+    const [nome, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [senha, setSenha] = useState('')
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const novoUsuario = { nome, email };
-        localStorage.setItem('user', JSON.stringify(novoUsuario));
-        window.location.href = '/';
-    }
+
+        try {
+            const response = await axios.post("https://trazpramimback.onrender.com/api/users", {
+                name: nome,
+                email,
+                password: senha
+            });
+
+            alert("Usuário cadastrado com sucesso!!" + `nome: ${response.data.name} email: ${response.data.email}`)
+
+            window.location.href = "/login"
+        } catch (error) {
+            if (error.response) {
+                alert("Erro ao cadastrar usuário")
+            } else {
+                alert("Erro ao conectar ao servidor")
+            }
+        }
+
+
+
+    };
     return (
         <div className="min-h-screen flex items-center justify-center bg-orange-100 p-4">
             <div className="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
