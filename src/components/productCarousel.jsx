@@ -1,6 +1,6 @@
 import React from "react";
 import Slider from "react-slick";
-import ProductCard from "./ProductCard";
+import ProductCard from "./productCard";
 
 import tenis from "../assets/imagens/tenis.png";
 import fone from "../assets/imagens/fone.png";
