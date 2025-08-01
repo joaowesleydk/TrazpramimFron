@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../components/navbar";
-import Lojashero from "../components/lojashero";
+import Lojashero from "../components/lojasHero";
 import Footer from "../components/footer";
  
 const Lojas =() =>{
