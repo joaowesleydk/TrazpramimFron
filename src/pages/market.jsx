@@ -1,7 +1,7 @@
 import React from "react";
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
-import Markethero from "../components/markethero";
+import Markethero from "../components/marketHero";
  
 const Market=() =>{
     return(
