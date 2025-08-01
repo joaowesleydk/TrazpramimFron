@@ -16,7 +16,7 @@ import arroz from "../assets/imagens/arroz.png";
 import linguca from "../assets/imagens/linguça.png";
 import sabao from "../assets/imagens/sabao.png";
 import feijao from "../assets/imagens/feijao.png"
-import MarketCard from "./marketcard";
+import MarketCard from "./marketCard";
  
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
