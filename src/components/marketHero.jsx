@@ -96,8 +96,8 @@ const sliderSettings = {
  
 const Markethero = () => {
   return (
-    <section className="bg-orange-100 w-full min-h-screen flex items-start justify-center pt-20">
-      <div className="w-full max-w-6xl bg-orange-200 shadow-md rounded-lg flex flex-col items-center px-6 pt-14 pb-8 gap-6 m-6">
+    <section className=" w-full min-h-screen flex items-start justify-center pt-20">
+      <div className="w-full max-w-6xl bg-gray-200 shadow-md rounded-lg flex flex-col items-center px-6 pt-14 pb-8 gap-6 m-6">
         <img
           src={Promo}
           alt="Promoção destaque"
@@ -107,16 +107,16 @@ const Markethero = () => {
           Conheça os melhores preços da região
         </p>
  
-        <h2 className="text-xl font-semibold text-orange-900 mb-8 text-center">
+        <h2 className="text-xl font-semibold text-gray-900 mb-8 text-center">
           Promoções em destaque!
         </h2>
  
         <div className="flex items-center w-full my-4">
-          <div className="flex-grow border-t-2 border-orange-800"></div>
-          <span className="mx-2 text-orange-800 text-2xl">
+          <div className="flex-grow border-t-2 border-gray-500"></div>
+          <span className="mx-2 text-black-800 text-2xl">
             <FaShoppingCart />
           </span>
-          <div className="flex-grow border-t-2 border-orange-800"></div>
+          <div className="flex-grow border-t-2 border-gray-500"></div>
         </div>
  
        

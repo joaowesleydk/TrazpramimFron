@@ -33,9 +33,9 @@ const RegisterForm = () => {
 
     };
     return (
-        <div className="min-h-screen flex items-center justify-center bg-orange-100 p-4">
+        <div className="min-h-screen flex items-center justify-center bg-white p-4">
             <div className="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
-                <h2 className="text-3xl font-bold text-center text-orange-500 mb-8">Cadastro</h2>
+                <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Cadastro</h2>
                 <form onSubmit={handleSubmit} className="space-y-6">
                     
                     <div>
@@ -66,7 +66,7 @@ const RegisterForm = () => {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
-                            className="w-full border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 text-base"
+                            className="w-full border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 text-base"
                             placeholder="Digite seu e-mail"
                         />
                     </div>
@@ -91,7 +91,7 @@ const RegisterForm = () => {
                    
                     <button
                         type="submit"
-                        className="w-full bg-orange-500 text-white py-3 rounded-md hover:bg-orange-600 transition-colors duration-300 font-semibold text-lg"
+                        className="w-full bg-gray-500 text-white py-3 rounded-md hover:bg-gray-800 transition-colors duration-300 font-semibold text-lg"
                     >
                         Cadastrar
                     </button>

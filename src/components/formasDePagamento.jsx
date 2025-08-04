@@ -27,8 +27,8 @@ const formas = [
 
 const FormasDePagamento = () => {
   return (
-    <div className="min-h-screen bg-orange-100 p-6 text-gray-800">
-      <h1 className="text-3xl font-bold mb-6 text-center text-orange-500">
+    <div className="min-h-screen bg-white p-6 text-gray-800">
+      <h1 className="text-3xl font-bold mb-6 text-center text-gray-500">
        <a href="/pagamento">Formas de Pagamento</a> 
       </h1>
 
@@ -36,9 +36,9 @@ const FormasDePagamento = () => {
         {formas.map((forma, index) => (
           <div
             key={index}
-            className="flex items-start gap-4 bg-orange-200 p-4 rounded-xl shadow hover:shadow-lg transition"
+            className="flex items-start gap-4 bg-gray-200 p-4 rounded-xl shadow hover:shadow-lg transition"
           >
-            <div className="text-orange-500">{forma.icone}</div>
+            <div className="text-gray-800">{forma.icone}</div>
             <div>
               <h2 className="text-lg font-semibold">{forma.nome}</h2>
               <p className="text-sm">{forma.descricao}</p>
