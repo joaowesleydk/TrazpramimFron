@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
-import { FaCreditCard, FaMoneyCheckAlt, FaBarcode } from "react-icons/fa";
+import { FaCreditCard, FaBarcode } from "react-icons/fa";
 import { SiPix } from "react-icons/si";
 import bairroImg from "../assets/imagens/bairro.png";
 
@@ -47,11 +47,13 @@ const CheckoutPage = () => {
   const gerarCepEMapa = () => {
     const cepFake = "35000-000";
     setCepGerado(cepFake);
-    const enderecoCompleto = `${rua} ${numero}, ${bairro}, ${cidade}, Minas Gerais`;
-    setMapaUrl(bairroImg); // imagem estática apenas como simulação
+    setMapaUrl(bairroImg); // imagem estática como simulação
   };
 
-  const subtotal = produto.preco * (produto.quantidade || 1);
+  const precoNumerico = Number(
+    produto.preco.replace("R$", "").replace(",", ".").trim()
+  );
+  const subtotal = precoNumerico * (produto.quantidade || 1);
   const total = subtotal - subtotal * desconto;
 
   const copiarTexto = async (texto) => {
@@ -67,38 +69,38 @@ const CheckoutPage = () => {
   const boletoCodigo = "12345678901234567890";
 
   return (
-    <div className="w-screen h-screen bg-gray-100 flex items-center justify-center p-4">
+    <div className="w-screen h-screen bg-white flex items-center justify-center p-4">
       <div className="flex flex-col md:flex-row gap-8 w-full h-full max-w-full">
-        <div className="flex-1 bg-gray-200 p-6 rounded-lg flex flex-col items-center">
-          <h1 className="text-3xl font-bold mb-4 bg-gradient-to-r from-[#223a9b] to-gray-800 bg-clip-text text-transparent">
-            oi
+        {/* LADO ESQUERDO - RESUMO DO PRODUTO */}
+        <div className="flex-1 bg-[#F2F2F2] p-6 rounded-lg flex flex-col items-center">
+          <h1 className="text-3xl font-bold mb-4 text-[#1C1C1C]">
+            Checkout
           </h1>
-          <div className="border border-gray-600 p-4 rounded-lg w-full max-w-sm">
-            <h2 className="text-2xl font-semibold mb-4">{produto.nome}</h2>
+          <div className="border border-gray-300 p-4 rounded-lg w-full max-w-sm bg-white shadow">
+            <h2 className="text-2xl font-semibold mb-4 text-[#1C1C1C]">
+              {produto.nome}
+            </h2>
             <img
               src={produto.imagem}
               alt={produto.nome}
               className="w-72 rounded-lg mb-4 mx-auto"
             />
             <div className="text-center">
-              <p className={`mb-2 ${desconto > 0 ? "text-gray-500" : ""}`}>
+              <p className={`mb-2 ${desconto > 0 ? "text-gray-500" : "text-[#1C1C1C]"}`}>
                 <strong>Preço original:</strong> R$ {subtotal.toFixed(2)}
               </p>
-              <p className="mt-1 text-gray-700">
-                Subtotal: R$ {subtotal.toFixed(2)}
-              </p>
               {desconto > 0 && (
-                <p className="mb-2 text-red-400 line-through">
+                <p className="mb-2 text-red-500 line-through">
                   Desconto: - R$ {(subtotal * desconto).toFixed(2)}
                 </p>
               )}
               <hr className="my-4 border-t" />
-              <h3 className="text-xl font-bold text-green-700">
+              <h3 className="text-xl font-bold text-[#28A745]">
                 Total: R$ {total.toFixed(2)}
               </h3>
               {cep.length > 0 && (
                 <p className="mt-4 text-gray-600">
-                  📦 Tempo estimado de entrega:{" "}
+                  📦 Entrega:{" "}
                   <span className="font-medium">3–5 dias úteis</span>
                 </p>
               )}
@@ -106,11 +108,15 @@ const CheckoutPage = () => {
           </div>
         </div>
 
-        <div className="flex-1 bg-white p-6 rounded-lg flex flex-col overflow-y-auto">
-          <h2 className="text-2xl font-semibold mb-4">Pagamento</h2>
+        {/* LADO DIREITO - PAGAMENTO */}
+        <div className="flex-1 bg-white p-6 rounded-lg flex flex-col overflow-y-auto shadow">
+          <h2 className="text-2xl font-semibold mb-4 text-[#1C1C1C]">
+            Pagamento
+          </h2>
 
+          {/* CEP */}
           <div className="mb-4">
-            <label htmlFor="cep" className="block mb-1 font-medium">
+            <label htmlFor="cep" className="block mb-1 font-medium text-[#1C1C1C]">
               Digite seu CEP:
             </label>
             <input
@@ -123,15 +129,16 @@ const CheckoutPage = () => {
             />
             <button
               onClick={() => setMostrarEnderecoManual(true)}
-              className="mt-2 w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded"
+              className="mt-2 w-full bg-[#FF6B00] hover:bg-orange-700 text-white py-2 rounded"
             >
               Não sei meu CEP
             </button>
           </div>
 
+          {/* CUPOM */}
           <div className="mb-4">
-            <label htmlFor="cupom" className="block mb-1 font-medium">
-              Cupom de Desconto (opcional):
+            <label htmlFor="cupom" className="block mb-1 font-medium text-[#1C1C1C]">
+              Cupom de Desconto:
             </label>
             <input
               id="cupom"
@@ -143,7 +150,7 @@ const CheckoutPage = () => {
             />
             <button
               onClick={aplicarCupom}
-              className="mt-2 w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded"
+              className="mt-2 w-full bg-[#FF6B00] hover:bg-orange-700 text-white py-2 rounded"
             >
               Aplicar Cupom
             </button>
@@ -152,7 +159,7 @@ const CheckoutPage = () => {
                 className={`mt-2 ${
                   mensagemCupom.includes("inválido")
                     ? "text-red-600"
-                    : "text-green-600"
+                    : "text-[#28A745]"
                 }`}
               >
                 {mensagemCupom}
@@ -160,66 +167,11 @@ const CheckoutPage = () => {
             )}
           </div>
 
-          {mostrarEnderecoManual && (
-            <div className="mb-4 space-y-3">
-              <input
-                type="text"
-                placeholder="Cidade em Minas Gerais"
-                value={cidade}
-                onChange={(e) => setCidade(e.target.value)}
-                className="w-full p-2 border border-gray-300 rounded"
-              />
-              <input
-                type="text"
-                placeholder="Bairro"
-                value={bairro}
-                onChange={(e) => setBairro(e.target.value)}
-                className="w-full p-2 border border-gray-300 rounded"
-              />
-              <input
-                type="text"
-                placeholder="Rua"
-                value={rua}
-                onChange={(e) => setRua(e.target.value)}
-                className="w-full p-2 border border-gray-300 rounded"
-              />
-              <input
-                type="text"
-                placeholder="Número da Casa"
-                value={numero}
-                onChange={(e) => setNumero(e.target.value)}
-                className="w-full p-2 border border-gray-300 rounded"
-              />
-
-              <button
-                onClick={() => {
-                  gerarCepEMapa();
-                  setMostrarMapa(true);
-                }}
-                className="mt-2 w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded"
-              >
-                Confirmar
-              </button>
-
-              {cepGerado && (
-                <div className="mt-4 p-4 bg-white border border-gray-300 rounded text-center">
-                  <p className="mb-2 font-medium">CEP Gerado: {cepGerado}</p>
-                  {mapaUrl && (
-                    <img
-                      src={mapaUrl}
-                      alt="Mapa do Local"
-                      className="w-full max-w-md mx-auto rounded"
-                    />
-                  )}
-                </div>
-              )}
-            </div>
-          )}
-
+          {/* MÉTODOS DE PAGAMENTO */}
           <ul className="mb-6">
             <li
               className={`cursor-pointer mb-3 flex items-center gap-2 hover:underline ${
-                pagamentoSelecionado === "Crédito" ? "font-bold" : ""
+                pagamentoSelecionado === "Crédito" ? "font-bold text-[#FF6B00]" : "text-[#1C1C1C]"
               }`}
               onClick={() =>
                 setPagamentoSelecionado(
@@ -227,11 +179,11 @@ const CheckoutPage = () => {
                 )
               }
             >
-              <FaCreditCard className="text-blue-600" /> Cartão de Crédito
+              <FaCreditCard className="text-[#FF6B00]" /> Cartão de Crédito
             </li>
             <li
               className={`cursor-pointer mb-3 flex items-center gap-2 hover:underline ${
-                pagamentoSelecionado === "Boleto" ? "font-bold" : ""
+                pagamentoSelecionado === "Boleto" ? "font-bold text-[#FF6B00]" : "text-[#1C1C1C]"
               }`}
               onClick={() =>
                 setPagamentoSelecionado(
@@ -239,11 +191,11 @@ const CheckoutPage = () => {
                 )
               }
             >
-              <FaBarcode className="text-gray-600" /> Boleto Bancário
+              <FaBarcode className="text-[#1C1C1C]" /> Boleto Bancário
             </li>
             <li
               className={`cursor-pointer flex items-center gap-2 hover:underline ${
-                pagamentoSelecionado === "Pix" ? "font-bold" : ""
+                pagamentoSelecionado === "Pix" ? "font-bold text-[#FF6B00]" : "text-[#1C1C1C]"
               }`}
               onClick={() =>
                 setPagamentoSelecionado(
@@ -255,38 +207,23 @@ const CheckoutPage = () => {
             </li>
           </ul>
 
+          {/* FORMULÁRIOS DE PAGAMENTO */}
           {pagamentoSelecionado === "Crédito" && (
             <div className="mb-4 space-y-3">
-              <input
-                type="text"
-                placeholder="Número do Cartão"
-                className="w-full p-2 border border-gray-300 rounded"
-              />
-              <input
-                type="text"
-                placeholder="Nome do Titular"
-                className="w-full p-2 border border-gray-300 rounded"
-              />
+              <input type="text" placeholder="Número do Cartão" className="w-full p-2 border border-gray-300 rounded" />
+              <input type="text" placeholder="Nome do Titular" className="w-full p-2 border border-gray-300 rounded" />
               <div className="flex gap-2">
-                <input
-                  type="text"
-                  placeholder="Validade (MM/AA)"
-                  className="flex-1 p-2 border border-gray-300 rounded"
-                />
-                <input
-                  type="text"
-                  placeholder="CVV"
-                  className="w-24 p-2 border border-gray-300 rounded"
-                />
+                <input type="text" placeholder="Validade (MM/AA)" className="flex-1 p-2 border border-gray-300 rounded" />
+                <input type="text" placeholder="CVV" className="w-24 p-2 border border-gray-300 rounded" />
               </div>
             </div>
           )}
 
           {pagamentoSelecionado === "Boleto" && (
-            <div className="mb-4 p-4 bg-white border border-gray-300 rounded text-center">
-              <p className="mb-2 font-medium">Clique abaixo para gerar seu boleto:</p>
+            <div className="mb-4 p-4 bg-[#F2F2F2] border border-gray-300 rounded text-center">
+              <p className="mb-2 font-medium text-[#1C1C1C]">Clique abaixo para gerar seu boleto:</p>
               <button
-                className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded"
+                className="bg-[#FF6B00] hover:bg-orange-700 text-white py-2 px-4 rounded"
                 onClick={() => setMostrarBoleto(true)}
               >
                 Gerar Boleto
@@ -299,14 +236,10 @@ const CheckoutPage = () => {
                     className="mx-auto mt-4"
                   />
                   <div className="mt-4 flex items-center justify-center gap-2">
-                    <input
-                      readOnly
-                      className="bg-gray-200 p-2 rounded flex-1"
-                      value={boletoCodigo}
-                    />
+                    <input readOnly className="bg-gray-200 p-2 rounded flex-1" value={boletoCodigo} />
                     <button
                       onClick={() => copiarTexto(boletoCodigo)}
-                      className="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded"
+                      className="bg-[#28A745] hover:bg-green-700 text-white py-2 px-4 rounded"
                     >
                       Copiar Código
                     </button>
@@ -317,22 +250,18 @@ const CheckoutPage = () => {
           )}
 
           {pagamentoSelecionado === "Pix" && (
-            <div className="mb-4 p-4 bg-white border border-gray-300 rounded text-center">
-              <p className="mb-2 font-medium">Copia e Cola:</p>
+            <div className="mb-4 p-4 bg-[#F2F2F2] border border-gray-300 rounded text-center">
+              <p className="mb-2 font-medium text-[#1C1C1C]">Copia e Cola:</p>
               <div className="flex items-center justify-center gap-2">
-                <input
-                  readOnly
-                  className="bg-gray-200 p-2 rounded flex-1 break-all"
-                  value={pixKey}
-                />
+                <input readOnly className="bg-gray-200 p-2 rounded flex-1 break-all" value={pixKey} />
                 <button
                   onClick={() => copiarTexto(pixKey)}
-                  className="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded"
+                  className="bg-[#28A745] hover:bg-green-700 text-white py-2 px-4 rounded"
                 >
                   Copiar
                 </button>
               </div>
-              <p className="mb-2 font-medium mt-4">QR Code:</p>
+              <p className="mb-2 font-medium mt-4 text-[#1C1C1C]">QR Code:</p>
               <img
                 src={`https://api.qrserver.com/v1/create-qr-code/?data=${pixKey}&size=200x200`}
                 alt="QR Code Pix"
@@ -340,7 +269,7 @@ const CheckoutPage = () => {
               />
               <button
                 onClick={() => copiarTexto(pixKey)}
-                className="mt-2 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded"
+                className="mt-2 bg-[#FF6B00] hover:bg-orange-700 text-white py-2 px-4 rounded"
               >
                 Copiar Chave Pix
               </button>

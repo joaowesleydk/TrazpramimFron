@@ -1,7 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
 import Slider from "react-slick";
-import ProductCard from "./productCard";
-
 import tenis from "../assets/imagens/tenis.png";
 import fone from "../assets/imagens/fone.png";
 import microondas from "../assets/imagens/microondas.png";
@@ -14,7 +12,7 @@ import "slick-carousel/slick/slick-theme.css";
 const NextArrow = ({ onClick }) => (
   <div
     onClick={onClick}
-    className="absolute top-1/2 -translate-y-1/2 right-[-30px] z-10 cursor-pointer bg-black/60 hover:bg-black text-white p-2 rounded-full shadow-md transition"
+    className="absolute top-1/2 -translate-y-1/2 right-[-30px] z-10 cursor-pointer bg-[#FF6B00] hover:bg-[#e65a00] text-white p-2 rounded-full shadow-md transition"
   >
     <ChevronRight size={20} />
   </div>
@@ -23,7 +21,7 @@ const NextArrow = ({ onClick }) => (
 const PrevArrow = ({ onClick }) => (
   <div
     onClick={onClick}
-    className="absolute top-1/2 -translate-y-1/2 left-[-30px] z-10 cursor-pointer bg-black/60 hover:bg-black text-white p-2 rounded-full shadow-md transition"
+    className="absolute top-1/2 -translate-y-1/2 left-[-30px] z-10 cursor-pointer bg-[#FF6B00] hover:bg-[#e65a00] text-white p-2 rounded-full shadow-md transition"
   >
     <ChevronLeft size={20} />
   </div>
@@ -44,7 +42,6 @@ const products = [
     price: "R$ 299,90",
     image:
       "https://http2.mlstatic.com/D_NQ_NP_676608-MLA87478169161_072025-O.webp",
-  
   },
   {
     id: 3,
@@ -70,6 +67,8 @@ const products = [
 ];
 
 const ProductCarousel = () => {
+  const [showAll, setShowAll] = useState(false);
+
   const settings = {
     dots: true,
     infinite: true,
@@ -81,43 +80,104 @@ const ProductCarousel = () => {
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
     responsive: [
-      { breakpoint: 1024, settings: { slidesToShow: 3 } },
-      { breakpoint: 768, settings: { slidesToShow: 2 } },
-      { breakpoint: 480, settings: { slidesToShow: 1 } },
+      { breakpoint: 1280, settings: { slidesToShow: 3 } },
+      { breakpoint: 1024, settings: { slidesToShow: 2 } },
+      { breakpoint: 640, settings: { slidesToShow: 1 } },
     ],
   };
 
   return (
-    <div className="bg-white max-w-7xl mx-auto px-6 py-10 relative">
-      <Slider {...settings}>
-        {products.map((product) => (
-          <div
-            key={product.id}
-            className="px-3 h-[460px] flex transition-transform duration-300 hover:scale-[1.02]"
-          >
-            <ProductCard {...product} />
-          </div>
-        ))}
-      </Slider>
+    <section className="bg-[#FFFFFF] py-12">
+      <div className="max-w-7xl mx-auto px-6 relative flex flex-col items-center">
+        {/* Título */}
+        <h2 className="text-3xl font-extrabold text-center mb-10 text-[#1C1C1C]">
+          🎉 Ofertas Diárias!
+        </h2>
 
-      <style>{`
-        .slick-dots {
-          bottom: -30px;
-        }
-        .slick-dots li button:before {
-          font-size: 12px;
-          color: #999;
-          opacity: 0.7;
-        }
-        .slick-dots li.slick-active button:before {
-          color: black;
-          opacity: 1;
-        }
-        .slick-slide > div {
-          height: 100%;
-        }
-      `}</style>
-    </div>
+        {/* Mostrar carrossel ou grid */}
+        {!showAll ? (
+          <Slider {...settings} className="w-full">
+            {products.map((product) => (
+              <div
+                key={product.id}
+                className="px-3 flex transition-transform duration-300 hover:scale-[1.03]"
+              >
+                <div className="bg-[#F2F2F2] rounded-xl shadow-md flex flex-col items-center justify-between w-full h-[460px] p-5">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-40 object-contain mb-4"
+                  />
+                  <h3 className="font-bold text-lg text-[#1C1C1C] mb-1">
+                    {product.name}
+                  </h3>
+                  <p className="text-sm text-gray-600 mb-3 text-center">
+                    {product.description}
+                  </p>
+                  <p className="font-bold text-xl text-[#1C1C1C] mb-4">
+                    {product.price}
+                  </p>
+                  <button className="mt-auto px-5 py-2 bg-[#FF6B00] text-white rounded-md font-semibold shadow-md hover:bg-[#e65a00] transition">
+                    Comprar Agora
+                  </button>
+                </div>
+              </div>
+            ))}
+          </Slider>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+            {products.map((product) => (
+              <div
+                key={product.id}
+                className="bg-[#F2F2F2] rounded-xl shadow-md flex flex-col items-center justify-between h-[460px] p-5 transition-transform duration-300 hover:scale-[1.02]"
+              >
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full h-40 object-contain mb-4"
+                />
+                <h3 className="font-bold text-lg text-[#1C1C1C] mb-1">
+                  {product.name}
+                </h3>
+                <p className="text-sm text-gray-600 mb-3 text-center">
+                  {product.description}
+                </p>
+                <p className="font-bold text-xl text-[#1C1C1C] mb-4">
+                  {product.price}
+                </p>
+                <button className="mt-auto px-5 py-2 bg-[#FF6B00] text-white rounded-md font-semibold shadow-md hover:bg-[#e65a00] transition">
+                  Comprar Agora
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Botão para alternar */}
+        <button
+          onClick={() => setShowAll(!showAll)}
+          className="mt-10 px-6 py-3 bg-[#FF6B00] text-white rounded-md font-semibold hover:bg-[#e65a00] transition-colors duration-300"
+        >
+          {showAll ? "Voltar ao Carrossel" : "Ver todos os itens"}
+        </button>
+
+        {/* Estilo dots */}
+        <style>{`
+          .slick-dots {
+            bottom: -35px;
+          }
+          .slick-dots li button:before {
+            font-size: 12px;
+            color: #999;
+            opacity: 0.7;
+          }
+          .slick-dots li.slick-active button:before {
+            color: #FF6B00;
+            opacity: 1;
+          }
+        `}</style>
+      </div>
+    </section>
   );
 };
 

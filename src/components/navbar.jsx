@@ -1,125 +1,93 @@
 import React, { useState, useEffect } from "react";
 import { PiShoppingCartFill } from "react-icons/pi";
-import Image from "../assets/imagens/logo.png";
 import { GiShoppingCart } from "react-icons/gi";
 import { BiSolidOffer } from "react-icons/bi";
 import { IoStorefrontSharp } from "react-icons/io5";
 import { IoIosArrowDown } from "react-icons/io";
-import { HiMenu, HiX } from "react-icons/hi"; // MOBILE #1: ícones para abrir/fechar o menu
-
+import { HiMenu, HiX } from "react-icons/hi";
+import Image from "../assets/imagens/logo.png";
 
 const Navbar = () => {
   const [showCategorias, setShowCategorias] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-
   useEffect(() => {
-    const user = localStorage.getItem('user');
+    const user = localStorage.getItem("user");
     setIsAuthenticated(!!user);
   }, []);
 
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
-
   const handleLogout = () => {
-    localStorage.removeItem('user');
+    localStorage.removeItem("user");
     setIsAuthenticated(false);
-    window.location.href = '/';
+    window.location.href = "/";
   };
-
 
   return (
-    <nav className="bg-gray-700 px-6 py-4 shadow-md rounded-b-lg">
-      {/* Topo */}
+    <nav className="bg-[#1c1c1c] px-6 py-4 shadow-md relative z-50">
+      {/* Topbar */}
       <div className="flex justify-between items-center">
-        <a
-          href="/"
-          className="flex items-center text-white font-bold text-2xl gap-3 hover:text-gray-500 transition-colors"
-        >
+        {/* Logo */}
+        <a href="/" className="flex items-center text-white font-bold text-xl gap-2">
           <img src={Image} alt="logo" className="w-10 h-auto" />
-          Traz pra mim
+          <span className="hover:text-[#FF6B00] transition">Traz pra mim</span>
         </a>
 
-
-        {/* MOBILE #2: botão menu hamburguer visível apenas no mobile */}
-        <button
-          className="text-white text-3xl md:hidden"
-          onClick={toggleMenu}
-        >
-          {isMenuOpen ? <HiX /> : <HiMenu />}
-        </button>
-
-
-        {/* Links topo - Desktop */}
-        <div className="gap-5 text-white font-bold hidden md:flex">
-          <a className="hover:text-gray-500" href="/suporte">Suporte</a>
-          {!isAuthenticated && (
-            <a className="hover:text-gray-500" href="/login">Login</a>
-          )}
-          {isAuthenticated && (
-            <div className="flex flex-col items-end gap-1">
-              <a
-                href="/perfil"
-                className="hover:text-gray-500 transition-colors"
-              >
-                Perfil
-              </a>
-              <button
-                onClick={handleLogout}
-                className="hover:text-gray-500 transition-colors"
-              >
-                Sair
-              </button>
-            </div>
-          )}
-        </div>
-      </div>
-
-
-      {/* Barra de busca */}
-      <div className="flex justify-center items-center mt-2">
-        <div className="flex items-center gap-2.5 w-full max-w-2xl">
+        {/* Search */}
+        <div className="hidden md:flex items-center gap-2.5 w-full max-w-lg">
           <input
             type="text"
             placeholder="Buscar..."
-            className="flex-1 px-4 py-2.5 rounded-full border border-white bg-white text-gray-800 text-sm focus:outline-none focus:ring-4 focus:ring-orange-200 transition-shadow"
+            className="flex-1 px-4 py-2.5 rounded-full border border-gray-300 bg-white text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B00] transition-shadow"
           />
-          <a
-            href="/carrinho"
-            className="text-white text-2xl hover:text-gray-500 transition-colors"
-          >
+          <a href="/carrinho" className="text-white text-2xl hover:text-[#FF6B00] transition-colors">
             <PiShoppingCartFill />
           </a>
         </div>
+
+        {/* Links de usuário */}
+        <div className="hidden md:flex gap-5 text-white font-medium">
+          <a className="hover:text-[#FF6B00]" href="/suporte">Suporte</a>
+          {!isAuthenticated ? (
+            <a className="hover:text-[#FF6B00]" href="/login">Login</a>
+          ) : (
+            <div className="flex flex-col items-end gap-1">
+              <a href="/perfil" className="hover:text-[#FF6B00]">Perfil</a>
+              <button onClick={handleLogout} className="hover:text-red-500 transition">Sair</button>
+            </div>
+          )}
+        </div>
+
+        {/* Botão mobile */}
+        <button
+          className="md:hidden text-white text-3xl"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          {isMenuOpen ? <HiX /> : <HiMenu />}
+        </button>
       </div>
 
-
-      {/* Menu principal - Desktop */}
-      <ul className="justify-center gap-20 list-none p-0 m-0 mt-6 relative hidden md:flex">
+      {/* Navbar links */}
+      <ul className="hidden md:flex justify-center gap-14 mt-5 text-white font-medium">
+        {/* Categorias */}
         <li className="relative">
           <button
             onClick={() => setShowCategorias(!showCategorias)}
-            className="text-white font-medium hover:text-gray-500 transition-colors flex items-center gap-1"
+            className="hover:text-[#FF6B00] transition flex items-center gap-1"
           >
             Categorias <IoIosArrowDown />
           </button>
-
-
           {showCategorias && (
-            <ul className="absolute top-full left-0 mt-2 bg-white text-gray-800 shadow-lg rounded-md w-48 z-10">
+            <ul className="absolute top-full left-0 mt-2 bg-white text-gray-800 shadow-lg rounded-md w-56 z-20">
               {[
-                "Veículos", "Supermercados", "Tecnologias", "Eletrodomesticos",
-                "Esportes e fitness", "Ferramentas", "Construção", "Pet Shop",
+                "Veículos", "Supermercados", "Tecnologias", "Eletrodomésticos",
+                "Esportes e Fitness", "Ferramentas", "Construção", "Pet Shop",
                 "Beleza e Cuidados", "Agro", "Brinquedos e Hobbies", "Modas"
               ].map((cat) => (
                 <li key={cat}>
                   <a
                     href={`/categorias/${cat.toLowerCase()}`}
-                    className="block px-4 py-2 hover:bg-gray-200 transition-colors"
+                    className="block px-4 py-2 hover:bg-[#F2F2F2] hover:text-[#FF6B00] transition"
                   >
                     {cat}
                   </a>
@@ -129,77 +97,48 @@ const Navbar = () => {
           )}
         </li>
 
-
         <li>
-          <a
-            href="/Supermercados"
-            className="text-white font-medium hover:text-gray-500 transition-colors flex items-center gap-1"
-          >
+          <a href="/Supermercados" className="hover:text-[#FF6B00] flex items-center gap-1">
             Supermercados <GiShoppingCart />
           </a>
         </li>
         <li>
-          <a
-            href="/Ofertas"
-            className="text-white font-medium hover:text-gray-500 transition-colors flex items-center gap-1"
-          >
+          <a href="/Ofertas" className="hover:text-[#FF6B00] flex items-center gap-1">
             Ofertas <BiSolidOffer />
           </a>
         </li>
         <li>
-          <a
-            href="/Lojas"
-            className="text-white font-medium hover:text-gray-500 transition-colors flex items-center gap-1"
-          >
+          <a href="/Lojas" className="hover:text-[#FF6B00] flex items-center gap-1">
             Lojas <IoStorefrontSharp />
           </a>
         </li>
       </ul>
 
-
-      {/* MOBILE #3: Menu mobile visível apenas quando aberto */}
+      {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="mt-4 flex flex-col gap-3 text-white font-medium md:hidden">
-          <a href="/suporte" className="hover:text-gray-400">Suporte</a>
-          {!isAuthenticated && (
-            <a href="/login" className="hover:text-gray-400">Login</a>
-          )}
-          {isAuthenticated && (
+        <div className="md:hidden mt-4 bg-[#1C1C1C] text-white rounded-lg shadow-lg p-4 space-y-3">
+          <input
+            type="text"
+            placeholder="Buscar..."
+            className="w-full px-4 py-2 rounded-full border border-gray-300 bg-white text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B00]"
+          />
+          <a href="/carrinho" className="block hover:text-[#FF6B00]">Carrinho</a>
+          <a href="/suporte" className="block hover:text-[#FF6B00]">Suporte</a>
+          <a href="/supermercados" className="block hover:text-[#FF6B00]">Supermercados</a>
+          <a href="/ofertas" className="block hover:text-[#FF6B00]">Ofertas</a>
+          <a href="/lojas" className="block hover:text-[#FF6B00]">Lojas</a>
+          {!isAuthenticated ? (
+            <a href="/login" className="block hover:text-[#FF6B00]">Login</a>
+          ) : (
             <>
-              <a href="/perfil" className="hover:text-gray-400">Perfil</a>
-              <button onClick={handleLogout} className="hover:text-gray-400">Sair</button>
+              <a href="/perfil" className="block hover:text-[#FF6B00]">Perfil</a>
+              <button onClick={handleLogout} className="text-left w-full hover:text-red-500">Sair</button>
             </>
           )}
-          <a href="/Supermercados" className="hover:text-gray-400 flex items-center gap-1">Supermercados <GiShoppingCart /></a>
-          <a href="/Ofertas" className="hover:text-gray-400 flex items-center gap-1">Ofertas <BiSolidOffer /></a>
-          <a href="/Lojas" className="hover:text-gray-400 flex items-center gap-1">Lojas <IoStorefrontSharp /></a>
-          <details className="bg-white text-gray-800 rounded-md px-2 py-1">
-            <summary className="cursor-pointer">Categorias</summary>
-            <ul className="pl-4">
-              {[
-                "Veículos", "Supermercados", "Tecnologias", "Eletrodomesticos",
-                "Esportes e fitness", "Ferramentas", "Construção", "Pet Shop",
-                "Beleza e Cuidados", "Agro", "Brinquedos e Hobbies", "Modas"
-              ].map((cat) => (
-                <li key={cat}>
-                  <a
-                    href={`/categorias/${cat.toLowerCase()}`}
-                    className="block py-1 hover:text-orange-600"
-                  >
-                    {cat}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </details>
         </div>
       )}
     </nav>
   );
 };
 
-
 export default Navbar;
-
-
- 

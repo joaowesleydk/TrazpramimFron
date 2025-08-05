@@ -21,7 +21,7 @@ const AccordionSection = ({ title, children }) => {
 const Sobre = () => {
   return (
     <>
-      <div className="flex flex-col min-h-screen bg-orange-100">
+      <div className="flex flex-col min-h-screen bg-white">
         <Navbar />
         <div className="max-w-5xl mx-auto px-6 py-12 text-gray-800">
           <h1 className="text-4xl font-bold mb-6 text-center">
@@ -85,12 +85,12 @@ const Sobre = () => {
             </p>
           </AccordionSection>
 
-          <div className="mt-10 p-6 bg-orange-200 border-l-4 border-orange-500 rounded-lg text-center">
+          <div className="mt-10 p-6 bg-gray-200 border-l-4 border-[#FF6B00] rounded-lg text-center">
             <h3 className="text-xl font-bold mb-2">Quer experimentar o futuro das compras?</h3>
             <p className="text-lg mb-2">
               Cadastre-se, explore e aproveite uma nova forma de comprar — do seu jeito!
             </p>
-            <button className="mt-2 px-5 py-3 bg-orange-500 text-white rounded-xl hover:bg-orange-600 transition">
+            <button className="mt-2 px-5 py-3 bg-[#FF6B00] text-white rounded-xl hover:bg-orange-800 transition">
              <a href="/cadastro">Cadastre-se agora</a> 
             </button>
           </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
- 
+
 import kitskincare from "../assets/imagens/kitskincare.png";
 import batons from "../assets/imagens/batons.png";
 import shampoo from "../assets/imagens/shampoo.png";
@@ -18,7 +18,7 @@ import cerave from "../assets/imagens/cerave.png";
 import sabonete from "../assets/imagens/sabonete.png";
 import rimelbc from "../assets/imagens/rimelbc.png";
 import oleo2 from "../assets/imagens/oleo2.png";
- 
+
 const produtos = [
   { nome: "Kit Skincare Facial creamy", preco: "R$ 89,90", imagem: kitskincare },
   { nome: "Shampoo e condicionador nutritivo wella", preco: "R$ 79,00", imagem: shampoo },
@@ -38,27 +38,28 @@ const produtos = [
   { nome: "Boca Rosa Máscara De Cílios - Meu Volumão", preco: "R$ 35,00", imagem: rimelbc },
   { nome: "Danos Vorazes Óleo Reparador 50ml Lola", preco: "R$ 20,00", imagem: oleo2 },
 ];
- 
+
 const Beleza = () => {
   const navigate = useNavigate();
- 
+
   const handleComprar = (produto) => {
     navigate("/comprar", { state: { produto } });
   };
- 
+
   return (
     <div className="font-sans p-6 bg-white min-h-screen">
       <h1 className="text-3xl font-bold text-center text-black mb-10">
         Beleza e Cuidados para você!
       </h1>
- 
-      <div className="flex flex-wrap justify-center gap-6">
+
+      {/* grid responsivo: 2 colunas no celular, 3 no tablet, 4 no desktop */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
         {produtos.map((produto, index) => (
           <div
             key={index}
-            className="bg-gray-200 border border-gray-200 rounded-xl shadow-md w-[250px] p-4 flex flex-col justify-between transition-transform hover:scale-[1.02]"
+            className="bg-gray-200 border border-gray-200 rounded-xl shadow-md p-4 flex flex-col justify-between transition-transform hover:scale-[1.02]"
           >
-            <div className="w-full h-48 flex justify-center items-center bg-white rounded-md overflow-hidden mb-4">
+            <div className="w-full h-40 flex justify-center items-center bg-white rounded-md overflow-hidden mb-4">
               <img
                 src={produto.imagem}
                 alt={produto.nome}
@@ -66,7 +67,7 @@ const Beleza = () => {
               />
             </div>
             <div>
-              <h3 className="text-gray-800 font-semibold min-h-[48px]">
+              <h3 className="text-gray-800 font-semibold text-sm min-h-[48px]">
                 {produto.nome}
               </h3>
               <p className="text-black text-lg font-bold mt-1">
@@ -75,7 +76,7 @@ const Beleza = () => {
             </div>
             <button
               onClick={() => handleComprar(produto)}
-              className="mt-4 bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-md transition duration-300"
+              className="mt-4 bg-[#FF6B00] hover:bg-[#e65a00] text-white font-bold py-2 px-4 rounded-md transition duration-300 text-sm"
             >
               Comprar agora
             </button>
@@ -85,6 +86,5 @@ const Beleza = () => {
     </div>
   );
 };
- 
+
 export default Beleza;
- 

@@ -14,75 +14,89 @@ import "swiper/css/pagination";
 
 const Hero = () => {
   const slides = [
-    { img: Promocao1, gradient: "linear-gradient(to bottom, rgb(173, 216, 230), rgb(255, 255, 255))" },
-    { img: Promocao2,gradient: "linear-gradient(to bottom, rgb(255, 182, 193), rgb(255, 255, 255))" },
-    { img: Promocao3,gradient: "linear-gradient(to bottom, rgb(255, 200, 150), rgb(255, 255, 255))" },
+    { img: Promocao1, gradient: "linear-gradient(to bottom, #ADD8E6, #fff)" },
+    { img: Promocao2, gradient: "linear-gradient(to bottom, #FFB6C1, #fff)" },
+    { img: Promocao3, gradient: "linear-gradient(to bottom, #FFC896, #fff)" },
   ];
 
   return (
-    <div className="flex flex-col bg--100">
-      <div className="flex-1 relative">
+    <div className="flex flex-col bg-white">
+      {/* Swiper Banner */}
+      <div className="relative">
         <Swiper
           modules={[Autoplay, Navigation, Pagination]}
           autoplay={{ delay: 3000 }}
           loop={true}
           navigation={true}
           pagination={{ clickable: true }}
-          className="w-full h-[300px] md:h-[400px]"
+          className="w-full h-[280px] md:h-[400px] lg:h-[480px]"
         >
           {slides.map((slide, index) => (
-          <SwiperSlide key={index}>
-  <div
-    className="w-full h-full flex items-center justify-center p-4" // adicionamos padding
-    style={{ background: slide.gradient }}
-  >
-    <img
-      src={slide.img}
-      alt={`Promoção ${index + 1}`}
-      className="max-h-[90%] max-w-[90%] object-contain" // padronizamos as proporções
-    />
-  </div>
-</SwiperSlide>
+            <SwiperSlide key={index}>
+              <div
+                className="w-full h-full flex items-center justify-center"
+                style={{ background: slide.gradient }}
+              >
+                <img
+                  src={slide.img}
+                  alt={`Promoção ${index + 1}`}
+                  className="max-h-[85%] max-w-[90%] object-contain drop-shadow-md"
+                />
+              </div>
+            </SwiperSlide>
           ))}
         </Swiper>
       </div>
 
-      <div>
-        <div> <h1 className="text-center font-bold text-2xl pt-16 mb-6">Ofertas do dia!!!</h1></div>
- <ProductCarousel/>
+      {/* Ofertas do Dia */}
+      <div className="px-6 md:px-12 lg:px-20">
+        <h1 className="text-center font-bold text-2xl md:text-3xl text-[#FF6B00] pt-16 mb-8">
+          Ofertas do Dia!
+        </h1>
+
+        {/* Linha divisória */}
+        <div className="flex items-center justify-center mb-8">
+          <div className="flex-grow border-t-2 border-gray-300 max-w-sm"></div>
+        </div>
+
+        <ProductCarousel />
       </div>
 
-      <div className="flex justify-center items-center px-6 py-16 overflow-x-auto">
-        <div className="flex gap-64 min-w-[960px]">
+      {/* Cards de Acesso Rápido */}
+      <div className="px-6 py-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {/* Login */}
           <a
             href="/login"
-            className="w-80 h-96 bg-gray-200 rounded-lg shadow-md flex-shrink-0 flex flex-col items-center justify-center text-black font-bold p-4 space-y-3 text-center hover:scale-105 transition-transform duration-300"
+            className="bg-gray-100 rounded-2xl shadow-md flex flex-col items-center justify-center p-8 space-y-4 text-center hover:scale-105 hover:shadow-lg transition-transform duration-300"
           >
-            <h1 className="text-xl">Entre na sua conta</h1>
-            <IoManSharp className="text-6xl text-gray-800" />
-            <p className="text-sm font-normal text-black">
+            <IoManSharp className="text-6xl text-[#1C1C1C]" />
+            <h2 className="text-xl font-bold">Entre na sua conta</h2>
+            <p className="text-sm text-gray-700">
               Aproveite ofertas para comprar tudo que quiser
             </p>
           </a>
 
+          {/* Localização */}
           <a
             href="/localizacao"
-            className="w-80 h-96 bg-gray-200 rounded-lg shadow-md flex-shrink-0 flex flex-col items-center justify-center text-black font-bold p-4 space-y-3 text-center hover:scale-105 transition-transform duration-300"
+            className="bg-gray-100 rounded-2xl shadow-md flex flex-col items-center justify-center p-8 space-y-4 text-center hover:scale-105 hover:shadow-lg transition-transform duration-300"
           >
-            <h1 className="text-xl">Insira sua localização</h1>
-            <GrMapLocation className="text-6xl text-gray-800" />
-            <p className="text-sm font-normal text-black">
+            <GrMapLocation className="text-6xl text-[#1C1C1C]" />
+            <h2 className="text-xl font-bold">Insira sua localização</h2>
+            <p className="text-sm text-gray-700">
               Confira os custos e prazos de entrega
             </p>
           </a>
 
+          {/* Pagamento */}
           <a
             href="/pagamento"
-            className="w-80 h-96 bg-gray-200 rounded-lg shadow-md flex-shrink-0 flex flex-col items-center justify-center text-black font-bold p-4 space-y-3 text-center hover:scale-105 transition-transform duration-300"
+            className="bg-gray-100 rounded-2xl shadow-md flex flex-col items-center justify-center p-8 space-y-4 text-center hover:scale-105 hover:shadow-lg transition-transform duration-300"
           >
-            <h1 className="text-xl">Formas de pagamento</h1>
-            <FaRegCreditCard className="text-6xl text-gray-800" />
-            <p className="text-sm font-normal text-black">
+            <FaRegCreditCard className="text-6xl text-[#1C1C1C]" />
+            <h2 className="text-xl font-bold">Formas de pagamento</h2>
+            <p className="text-sm text-gray-700">
               Pague suas compras com rapidez e segurança
             </p>
           </a>
