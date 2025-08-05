@@ -5,7 +5,7 @@ import { FaRegCreditCard } from "react-icons/fa";
 import Promocao1 from "../assets/imagens/promocao1.png";
 import Promocao2 from "../assets/imagens/promocao2.png";
 import Promocao3 from "../assets/imagens/promocao3.png";
-import ProductCarousel from "./ProductCarousel";
+import ProductCarousel from "./productCarousel";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
