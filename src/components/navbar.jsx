@@ -5,20 +5,25 @@ import { GiShoppingCart } from "react-icons/gi";
 import { BiSolidOffer } from "react-icons/bi";
 import { IoStorefrontSharp } from "react-icons/io5";
 import { IoIosArrowDown } from "react-icons/io";
+import { HiMenu, HiX } from "react-icons/hi"; // MOBILE #1: ícones para abrir/fechar o menu
+
 
 const Navbar = () => {
   const [showCategorias, setShowCategorias] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+
   useEffect(() => {
     const user = localStorage.getItem('user');
     setIsAuthenticated(!!user);
   }, []);
 
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
 
   const handleLogout = () => {
     localStorage.removeItem('user');
@@ -26,8 +31,10 @@ const Navbar = () => {
     window.location.href = '/';
   };
 
+
   return (
-    <nav className="bg-gray-700 px-6 py-4 flex flex-col gap-0 shadow-md rounded-b-lg">
+    <nav className="bg-gray-700 px-6 py-4 shadow-md rounded-b-lg">
+      {/* Topo */}
       <div className="flex justify-between items-center">
         <a
           href="/"
@@ -37,7 +44,18 @@ const Navbar = () => {
           Traz pra mim
         </a>
 
-        <div className="flex gap-5 text-white font-bold">
+
+        {/* MOBILE #2: botão menu hamburguer visível apenas no mobile */}
+        <button
+          className="text-white text-3xl md:hidden"
+          onClick={toggleMenu}
+        >
+          {isMenuOpen ? <HiX /> : <HiMenu />}
+        </button>
+
+
+        {/* Links topo - Desktop */}
+        <div className="gap-5 text-white font-bold hidden md:flex">
           <a className="hover:text-gray-500" href="/suporte">Suporte</a>
           {!isAuthenticated && (
             <a className="hover:text-gray-500" href="/login">Login</a>
@@ -61,6 +79,8 @@ const Navbar = () => {
         </div>
       </div>
 
+
+      {/* Barra de busca */}
       <div className="flex justify-center items-center mt-2">
         <div className="flex items-center gap-2.5 w-full max-w-2xl">
           <input
@@ -77,7 +97,9 @@ const Navbar = () => {
         </div>
       </div>
 
-      <ul className="flex justify-center gap-20 list-none p-0 m-0 mt-6 relative">
+
+      {/* Menu principal - Desktop */}
+      <ul className="justify-center gap-20 list-none p-0 m-0 mt-6 relative hidden md:flex">
         <li className="relative">
           <button
             onClick={() => setShowCategorias(!showCategorias)}
@@ -85,6 +107,7 @@ const Navbar = () => {
           >
             Categorias <IoIosArrowDown />
           </button>
+
 
           {showCategorias && (
             <ul className="absolute top-full left-0 mt-2 bg-white text-gray-800 shadow-lg rounded-md w-48 z-10">
@@ -105,6 +128,7 @@ const Navbar = () => {
             </ul>
           )}
         </li>
+
 
         <li>
           <a
@@ -130,17 +154,52 @@ const Navbar = () => {
             Lojas <IoStorefrontSharp />
           </a>
         </li>
-        <li>
-          <a
-            href="/FormasDePagamento"
-            className="text-white font-medium hover:text-gray-500 transition-colors flex items-center gap-1"
-          >
-            {/* conteúdo vazio */}
-          </a>
-        </li>
       </ul>
+
+
+      {/* MOBILE #3: Menu mobile visível apenas quando aberto */}
+      {isMenuOpen && (
+        <div className="mt-4 flex flex-col gap-3 text-white font-medium md:hidden">
+          <a href="/suporte" className="hover:text-gray-400">Suporte</a>
+          {!isAuthenticated && (
+            <a href="/login" className="hover:text-gray-400">Login</a>
+          )}
+          {isAuthenticated && (
+            <>
+              <a href="/perfil" className="hover:text-gray-400">Perfil</a>
+              <button onClick={handleLogout} className="hover:text-gray-400">Sair</button>
+            </>
+          )}
+          <a href="/Supermercados" className="hover:text-gray-400 flex items-center gap-1">Supermercados <GiShoppingCart /></a>
+          <a href="/Ofertas" className="hover:text-gray-400 flex items-center gap-1">Ofertas <BiSolidOffer /></a>
+          <a href="/Lojas" className="hover:text-gray-400 flex items-center gap-1">Lojas <IoStorefrontSharp /></a>
+          <details className="bg-white text-gray-800 rounded-md px-2 py-1">
+            <summary className="cursor-pointer">Categorias</summary>
+            <ul className="pl-4">
+              {[
+                "Veículos", "Supermercados", "Tecnologias", "Eletrodomesticos",
+                "Esportes e fitness", "Ferramentas", "Construção", "Pet Shop",
+                "Beleza e Cuidados", "Agro", "Brinquedos e Hobbies", "Modas"
+              ].map((cat) => (
+                <li key={cat}>
+                  <a
+                    href={`/categorias/${cat.toLowerCase()}`}
+                    className="block py-1 hover:text-orange-600"
+                  >
+                    {cat}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </details>
+        </div>
+      )}
     </nav>
   );
 };
 
+
 export default Navbar;
+
+
+ 
