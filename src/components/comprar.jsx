@@ -71,7 +71,7 @@ const CheckoutPage = () => {
       <div className="flex flex-col md:flex-row gap-8 w-full h-full max-w-full">
         <div className="flex-1 bg-gray-200 p-6 rounded-lg flex flex-col items-center">
           <h1 className="text-3xl font-bold mb-4 bg-gradient-to-r from-[#223a9b] to-gray-800 bg-clip-text text-transparent">
-            CENTAURO
+            oi
           </h1>
           <div className="border border-gray-600 p-4 rounded-lg w-full max-w-sm">
             <h2 className="text-2xl font-semibold mb-4">{produto.nome}</h2>

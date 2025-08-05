@@ -1,7 +1,7 @@
 import React from "react";
 import LojasCard from "./lojasCard";
 import Slider from "react-slick";
-import loja1 from "../assets/imagens/rener.png"
+
 import loja2 from "../assets/imagens/boticario.png"
 import loja3 from "../assets/imagens/franciny.png"
 import loja4 from "../assets/imagens/rihappy.png"
